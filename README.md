@@ -100,6 +100,9 @@ If you are Python developer, feel free to create a pull request.
 ### Max for Live device
 - UI input fields for network parameters (IP and port)
 
+# Support & Community
+Join our [Discord](https://discord.gg/Yp24ZC4n) server to discuss your ideas and issues with the community.
+
 # Sponsors
 - [goodtimes](https://www.goodtimes.technology) | Lasershows
 - [sync.blue®](https://www.sync.blue) | Technology partner
