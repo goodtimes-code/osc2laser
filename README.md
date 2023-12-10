@@ -68,7 +68,9 @@ As a user, feel free to create any issue.
 If you are Python developer, feel free to create a pull request. 
 
 ## OSC receiver
-- Installer
+- More docs
+  - Quick Setup for *Max for Live device* 
+- More installers
   - MacOS
   - Windows
   - Linux
