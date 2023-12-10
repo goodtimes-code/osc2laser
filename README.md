@@ -80,6 +80,7 @@ If you are Python developer, feel free to create a pull request.
   - SVG file
   - ...
 - More laser effects
+  - Brightness
   - Scale
   - Rotate
   - Dots
