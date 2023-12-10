@@ -1,5 +1,5 @@
 # Preamble
-osc2laser (*OSC to laser*) is a completely free, open source, solution to **create stunning lasershows** - live or by pre-programmed by timeline.
+osc2laser (*OSC to laser*) is a completely free, open source, solution to **create stunning lasershows** - live or pre-programmed by timeline.
 
 It enables you to simply control your showlasers via any OSC-compatible software (Ableton Live, TouchOSC, Vezér,...).
 
