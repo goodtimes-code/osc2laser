@@ -1,0 +1,5 @@
+art
+pygame
+numpy
+configparser
+python-osc

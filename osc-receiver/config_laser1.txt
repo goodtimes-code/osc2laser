@@ -1,0 +1,49 @@
+[general]
+
+[logging]
+; yes or no
+laser_point = no
+laser_object_points = no
+points_per_frame = no
+osc_server_received_message = no
+osc_server_add_or_remove_laser_object = yes
+osc_server_effect_handling = no
+
+[laser_output]
+# Pixel dimensions
+width = 4095
+height = 4095
+
+# How many points per second to display
+# max: see laser device specification
+# if too high: unsharp edges
+# if too low = flickering output
+scan_rate = 40000
+
+# Laser power (intensity, brightness)
+# min: 0.01
+# max: 1.0 (=100% intensity)
+#intensity_factor = 0.7
+intensity_factor = 0.3
+
+# How often blank points (at the beginning of each new laser object) shall be repeated
+# min: 1
+# if too low = laser objects will be connected by an afterglowing crooked line, because scanners move to next object however laser is not shut off completely
+# if too high = edges oft laser objects seem to be brighter than the rest
+blank_point_frames = 40
+
+# How many extra points shall be added between two laser points
+# min: 100
+# if too low: edges look distorted
+# if too high: flickering output
+interpolated_points = 100
+
+[laser_preview]
+# laser_output dimensions are divided by this factor
+# to define preview screen size
+screen_scale_factor = 0.17
+laser_point_size = 2
+
+[osc_server]
+ip = 127.0.0.1
+port = 2345

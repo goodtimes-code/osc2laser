@@ -1,0 +1,5 @@
+venv
+*.log
+__pycache__
+*.bak
+playground
