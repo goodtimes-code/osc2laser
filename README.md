@@ -40,13 +40,16 @@ For *Max for Live* developers:
 
 # Quick Start
 ## OSC receiver
-- Setup Python 3
+- Python 3
   - Install the Python 3 runtime which matches your operating system (Windows, Mac, Linux,...).
   - Install virtual environment: `python -m venv venv`
   - Change to venv: `source venv/bin/activate`
   - Change to osc-receiver directory: `cd osc-receiver`
   - Install requirements: `python -m pip install -r requirements.txt`
-- Run OSC receiver: `python main.py`
+- Laser DAC driver
+  - Get the right `osc-receiver/libHeliosDacAPI.so` from [here](https://github.com/Grix/helios_dac) to match your OS (driver for x86_64 macOS already included) 
+- Run
+  - Start OSC receiver: `python main.py`
 
 This starts an OSC server on *localhost* at UDP port *2345*.
 See *config_laser1.txt* for more optional settings.
