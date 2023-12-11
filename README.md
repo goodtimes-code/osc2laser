@@ -3,7 +3,7 @@ osc2laser (*OSC to laser*) is a completely free, open source, solution to **crea
 
 It enables you to simply control your showlasers via any OSC-compatible software (Ableton Live, TouchOSC, Vezér,...).
 
-![Demo](osc-senders/max-for-live-device/demo1.gif)
+![Demo](osc-senders/max-for-live-device/doc/demo1.gif)
 
 *2D laser preview of animated timeline using Ableton Live*
 
@@ -40,19 +40,32 @@ For *Max for Live* developers:
 
 # Quick Start
 ## OSC receiver
-- Python 3
-  - Install the Python 3 runtime which matches your operating system (Windows, Mac, Linux,...).
-  - Install virtual environment: `python -m venv venv`
-  - Change to venv: `source venv/bin/activate`
-  - Change to osc-receiver directory: `cd osc-receiver`
-  - Install requirements: `python -m pip install -r requirements.txt`
-- Laser DAC driver
-  - Get the right `osc-receiver/libHeliosDacAPI.so` from [here](https://github.com/Grix/helios_dac) to match your OS (driver for x86_64 macOS already included) 
-- Run
-  - Start OSC receiver: `python main.py`
+- Python 3:
+  1. Install the Python 3 runtime which matches your operating system (Windows, Mac, Linux,...).
+  2. Install virtual environment: `python -m venv venv`
+  3. Change to venv: `source venv/bin/activate`
+  4. Change to osc-receiver directory: `cd osc-receiver`
+  5. Install requirements: `python -m pip install -r requirements.txt`
+- Laser DAC driver:
+  1. Get the right `osc-receiver/libHeliosDacAPI.so` from [here](https://github.com/Grix/helios_dac) to match your OS (driver for x86_64 macOS already included) 
+- Run:
+  1. Start OSC receiver: `python main.py`
 
 This starts an OSC server on *localhost* at UDP port *2345*.
 See *config_laser1.txt* for more optional settings.
+
+## OSC sender
+### Max for Live device
+![Demo](osc-senders/max-for-live-device/doc/setup.gif)
+
+*Setup of the Max for Live device in Ableton Live*
+
+1. Start Ableton Live
+2. Create a new project
+3. Switch to session view (*tab* key)
+4. Drag `osc-senders/max-for-live-device/osc2laser.amxd` into the session window to create a new track.
+5. Right click the UI elements (laser object, X position, Y position,...) to show its automation track in a new lane
+6. Add key frames to the automation lanes and watch the output in the laser preview window.
 
 # OSC messages
 - /laserobject
