@@ -110,7 +110,10 @@ If you are Python developer, feel free to create a pull request.
   - LaserCube
   - ...
 - More OSC sender examples
+  - TouchOSC
   - Python script
+- Clean code
+  - Add tests
 
 ## Example OSC senders
 ### Max for Live device
