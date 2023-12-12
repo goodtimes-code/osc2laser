@@ -3,3 +3,4 @@ pygame
 numpy
 configparser
 python-osc
+pytest
