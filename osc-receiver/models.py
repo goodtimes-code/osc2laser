@@ -103,7 +103,7 @@ class StaticWave(LaserObject):
             
 
 class AnimatedWave(StaticWave):
-    def __init__(self, group=0, animation_speed=1):
+    def __init__(self, group=0, animation_speed=0.5):
         super().__init__(group)
         self.animation_progress = 0
         self.animation_speed = animation_speed
@@ -118,7 +118,8 @@ class AnimatedWave(StaticWave):
         # Add points to the point list
         for x in range(0, self.wave_length, 50):
             # Update the y value based on the current animation progress
-            y = math.sin((2 * math.pi * self.frequency * (x + self.animation_progress)) / self.wave_length) * self.amplitude + self.vertical_shift
+            # Subtracting animation_progress from x to shift in the opposite direction
+            y = math.sin((2 * math.pi * self.frequency * (x - self.animation_progress)) / self.wave_length) * self.amplitude + self.vertical_shift
 
             # Create a new laser point at this position
             laser_point = LaserPoint(int(x), int(y))
@@ -128,6 +129,7 @@ class AnimatedWave(StaticWave):
 
             # Add the laser point to the point list
             self.point_list.append(laser_point)
+
 
 
 
