@@ -30,7 +30,7 @@ def main():
     global main_running
 
     print(art.text2art("osc2laser"))
-    logging.info('[Main] osc2laser - Starting up...')
+    logging.info('[Main] Starting up...')
 
     laser_output_thread = threading.Thread(target=process_laser_output)
     laser_output_thread.start()
