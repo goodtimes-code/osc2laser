@@ -4,6 +4,7 @@ import configparser
 import time
 import global_data
 import argparse
+import threading
 import pythonosc.udp_client
 from pythonosc import dispatcher
 from pythonosc import osc_server
@@ -45,7 +46,7 @@ def handle_osc_message(address, *args):
                             effect.level = pos
 
 
-def process_osc_input():
+def process_osc_input():    
     disp = dispatcher.Dispatcher()
     disp.map("*", print_osc_message)
     disp.map("/laserobject", handle_osc_message)
@@ -55,17 +56,24 @@ def process_osc_input():
     server = osc_server.ThreadingOSCUDPServer(
         (global_data.config['osc_server']['ip'], int(global_data.config['osc_server']['port'])), disp)
     print(f"[OSC] Serving on {server.server_address}")
+    
+    # Run the server in a separate thread
+    server_thread = threading.Thread(target=server.serve_forever)
+    server_thread.start()
 
-    # Run the server as long as global_data.running is True
-    while global_data.running:
-        server.handle_request()
-
-        # Optional: Add a small delay to prevent the loop from consuming too much CPU
-        time.sleep(0.01)
-
-    # Shutdown the server
-    server.server_close()
-    logging.info('[OSC] Successfully stopped')
+    # Monitor the global_data.running flag
+    try:
+        while global_data.running:
+            # Implement a periodic check with a short sleep to reduce CPU usage
+            time.sleep(0.1)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        # Stop the server
+        server.shutdown()
+        server.server_close()
+        server_thread.join()
+        logging.info('[OSC] Successfully stopped')
 
 def setup():
     laser_point1 = LaserPoint(0, int(global_data.config['laser_output']['height'])/2)
