@@ -16,6 +16,7 @@ def get_optimized_point_list():
         # Prepare effects (shifts)
         x_shift = sum(effect.level for effect in visible_laser_object.effects if effect.name == 'X_POS')
         y_shift = sum(effect.level for effect in visible_laser_object.effects if effect.name == 'Y_POS')
+        rgb_intensity = sum(effect.level for effect in visible_laser_object.effects if effect.name == 'RGB_INTENSITY')
 
         # Add a blank point before every laser object
         blank_point_frames = int(global_data.config['laser_output']['blank_point_frames'])
@@ -27,8 +28,15 @@ def get_optimized_point_list():
         previously_optimized_laser_point = None
         for laser_point in visible_laser_object.point_list:
             optimized_laser_point = copy(laser_point)
+            
+            # X/Y position
             optimized_laser_point.x += x_shift
             optimized_laser_point.y += y_shift
+            
+            # RGB intensity
+            # optimized_laser_point.r *= rgb_intensity
+            # optimized_laser_point.g *= rgb_intensity
+            # optimized_laser_point.b *= rgb_intensity
 
             # Interpolate points for objects with small number of points
             if previously_optimized_laser_point and len(visible_laser_object.point_list) < 80:
