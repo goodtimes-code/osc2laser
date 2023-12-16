@@ -45,7 +45,7 @@ def handle_osc_message(address, *args):
                             effect.level = pos
 
 
-def process_osc_input():    
+def process_osc_input():
     disp = dispatcher.Dispatcher()
     disp.map("*", print_osc_message)
     disp.map("/laserobject", handle_osc_message)
@@ -55,8 +55,16 @@ def process_osc_input():
     server = osc_server.ThreadingOSCUDPServer(
         (global_data.config['osc_server']['ip'], int(global_data.config['osc_server']['port'])), disp)
     print(f"[OSC] Serving on {server.server_address}")
-    server.serve_forever()
 
+    # Run the server as long as global_data.running is True
+    while global_data.running:
+        server.handle_request()
+
+        # Optional: Add a small delay to prevent the loop from consuming too much CPU
+        time.sleep(0.01)
+
+    # Shutdown the server
+    server.server_close()
     logging.info('[OSC] Successfully stopped')
 
 def setup():
