@@ -1,4 +1,5 @@
 import global_data
+import math
 
 
 class Effect():
@@ -44,6 +45,9 @@ class LaserObject():
         for effect in self.effects:
             if effect.name == effect_name:
                 return True
+            
+    def update(self):
+        pass
     
     def __str__(self):
         return('LaserObject, type: ' + str(type(self)) + ', group:' + str(self.group) + ', effects:' + str(self.effects))
@@ -96,5 +100,35 @@ class StaticWave(LaserObject):
             laser_point = LaserPoint(int(x), int(y))
             laser_point.set_color(0, 0, 150)
             self.point_list.append(laser_point)
+            
+
+class AnimatedWave(StaticWave):
+    def __init__(self, group=0, animation_speed=1):
+        super().__init__(group)
+        self.animation_progress = 0
+        self.animation_speed = animation_speed
+
+    def update(self):
+        # Increment the animation progress
+        self.animation_progress += self.animation_speed
+
+        # Clear the point list
+        self.point_list = []
+
+        # Add points to the point list
+        for x in range(0, self.wave_length, 50):
+            # Update the y value based on the current animation progress
+            y = math.sin((2 * math.pi * self.frequency * (x + self.animation_progress)) / self.wave_length) * self.amplitude + self.vertical_shift
+
+            # Create a new laser point at this position
+            laser_point = LaserPoint(int(x), int(y))
+
+            # Set the color of the laser point
+            laser_point.set_color(0, 0, 100)
+
+            # Add the laser point to the point list
+            self.point_list.append(laser_point)
+
+
 
 
