@@ -10,7 +10,7 @@ def get_optimized_point_list():
     optimized_point_list = []
 
     for visible_laser_object in global_data.visible_laser_objects:
-        # Update laser objects (e.g., for moving elements)
+        # Update anomated laser objects
         visible_laser_object.update()
 
         # Prepare effects (shifts)

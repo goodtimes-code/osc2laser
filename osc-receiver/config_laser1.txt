@@ -6,7 +6,7 @@ laser_point = no
 laser_object_points = no
 points_per_frame = no
 osc_server_received_message = no
-osc_server_add_or_remove_laser_object = yes
+osc_server_add_or_remove_laser_object = no
 osc_server_effect_handling = no
 
 [laser_output]
@@ -24,7 +24,7 @@ scan_rate = 40000
 # min: 0.01
 # max: 1.0 (=100% intensity)
 #intensity_factor = 0.7
-intensity_factor = 0.3
+intensity_factor = 0.7
 
 # How often blank points (at the beginning of each new laser object) shall be repeated
 # min: 1
