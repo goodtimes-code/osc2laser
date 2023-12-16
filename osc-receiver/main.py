@@ -48,4 +48,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    logging.info('[Main] L4L - Server successfully stopped')
+    logging.info('[Main] Successfully stopped')
