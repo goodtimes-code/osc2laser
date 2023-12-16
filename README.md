@@ -73,6 +73,7 @@ See *config_laser1.txt* for more optional settings.
   - 1 = green horizontal line
   - 2 = red vertical line
   - 3 = blue static wave
+  - 4 - blue animated wave
 - /effect/x_pos and /effect/x_pos
   - -4095 to 4095: move X or Y position of laserobject
 
