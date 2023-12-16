@@ -35,9 +35,6 @@ def main():
     laser_output_thread = threading.Thread(target=process_laser_output)
     laser_output_thread.start()
 
-    # midi_input_thread = threading.Thread(target=process_midi_input)
-    # midi_input_thread.start()
-
     osc_input_thread = threading.Thread(target=process_osc_input)
     osc_input_thread.start()
 
