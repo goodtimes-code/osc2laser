@@ -1,4 +1,4 @@
-from models import LaserPoint, Blank, StaticLine, StaticWave, Effect
+from models import LaserPoint, Blank, StaticLine, StaticWave, Effect, AnimatedWave
 import logging
 import configparser
 import time
@@ -77,6 +77,7 @@ def setup():
         StaticLine(laser_point1, laser_point2, 0), # Green horizontal line
         StaticLine(laser_point3, laser_point4, 0), # Red vertical line
         StaticWave(0), # Blue static wave
+        AnimatedWave(0), # Blue animated wave
     ]
 
 setup()

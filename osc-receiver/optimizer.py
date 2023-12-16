@@ -17,6 +17,9 @@ def get_optimized_point_list():
     optimized_point_list = []
     
     for visible_laser_object in global_data.visible_laser_objects:
+        
+        # Some LaserObjects need to update themselves due to current time (moving waves, moving SVG images...)
+        visible_laser_object.update()
 
         # prepare effects
         x_shift = 0 # per laser object !
