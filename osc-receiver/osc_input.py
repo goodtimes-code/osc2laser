@@ -57,6 +57,7 @@ def process_osc_input():
     disp.map("/laserobject", handle_osc_message)
     disp.map("/effect/x_pos", handle_osc_message)
     disp.map("/effect/y_pos", handle_osc_message)
+    disp.map("/effect/rgb_intensity", handle_osc_message)
 
     server = osc_server.ThreadingOSCUDPServer(
         (global_data.config['osc_server']['ip'], int(global_data.config['osc_server']['port'])), disp)
