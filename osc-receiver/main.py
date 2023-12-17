@@ -40,6 +40,7 @@ def main():
 
     laser_preview = LaserPreview()
     laser_preview.run()
+    
     global_data.running = False
 
 
