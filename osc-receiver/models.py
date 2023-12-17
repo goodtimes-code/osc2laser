@@ -107,6 +107,9 @@ class AnimatedWave(StaticWave):
         super().__init__(group)
         self.animation_progress = 0
         self.animation_speed = animation_speed
+        
+        self.group = group
+        self.effects = []
 
     def update(self):
         # Increment the animation progress

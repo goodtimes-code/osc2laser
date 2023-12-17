@@ -29,9 +29,14 @@ def handle_osc_message(address, *args):
         except Exception as e:
             logging.error(f'[OSC] Error while adding new laser object: {e}')
             
-    elif address in ["/effect/x_pos", "/effect/y_pos"]:
+    elif address.startswith("/effect/"):
         pos = int(args[0])
-        effect_name = "X_POS" if address == "/effect/x_pos" else "Y_POS"
+        effect_names = {
+            "/effect/x_pos": "X_POS",
+            "/effect/y_pos": "Y_POS",
+            "/effect/rgb_intensity": "RGB_INTENSITY"
+        }
+        effect_name = effect_names.get(address, "UNKNOWN_EFFECT")
         if global_data.config['logging']['osc_server_effect_handling'] == 'yes':
             logging.info(f"[OSC] Handling effect {effect_name}: {pos}")
 
@@ -52,6 +57,7 @@ def process_osc_input():
     disp.map("/laserobject", handle_osc_message)
     disp.map("/effect/x_pos", handle_osc_message)
     disp.map("/effect/y_pos", handle_osc_message)
+    disp.map("/effect/rgb_intensity", handle_osc_message)
 
     server = osc_server.ThreadingOSCUDPServer(
         (global_data.config['osc_server']['ip'], int(global_data.config['osc_server']['port'])), disp)

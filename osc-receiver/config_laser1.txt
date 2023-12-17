@@ -1,5 +1,6 @@
 [general]
 
+; WARNING: LOGGING DRASTICALLY DECREASES PERFORMANCE !!!
 [logging]
 ; yes or no
 laser_point = no
