@@ -20,6 +20,7 @@ This projects is in an early stage to get feedback and to urgently find more con
 - Effects:
   - X position
   - Y position
+  - RGB intensity ("brightness")
 
 # System requirements
 - Python 3 runtime
@@ -76,6 +77,8 @@ See *config_laser1.txt* for more optional settings.
   - 4 - blue animated wave
 - /effect/x_pos and /effect/x_pos
   - -4095 to 4095: move X or Y position of laserobject
+- /effect/rgb_intensity
+  - 0 to 255: brightness of the RGB colors
 
 # Roadmap
 This is what needs to be worked on. 
@@ -95,7 +98,6 @@ If you are Python developer, feel free to create a pull request.
   - SVG file
   - ...
 - More laser effects
-  - Brightness
   - Scale
   - Rotate
   - Dots
