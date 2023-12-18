@@ -4,3 +4,4 @@ numpy
 configparser
 python-osc
 pytest
+pyinstaller
