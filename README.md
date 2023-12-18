@@ -120,7 +120,7 @@ If you are Python developer, feel free to create a pull request.
 ### Max for Live device
 - UI input fields for network parameters (IP and port)
 
-# Installer
+# Run installer (create binary)
 ## For Mac & Linux
 - `cd osc-receiver`
 - `venv/bin/pyinstaller --onefile --paths=venv/lib/python3.12/site-packages main.py`
