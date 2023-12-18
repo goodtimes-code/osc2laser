@@ -124,5 +124,5 @@ If you are Python developer, feel free to create a pull request.
 Join our [Discord](https://discord.gg/Yp24ZC4n) server to discuss your ideas and issues with the community.
 
 # Sponsors
-- [goodtimes](https://www.goodtimes.technology) | Lasershows
+- [goodtimes](https://www.goodtimes.technology) | Interactive showlaser technology: lasershows, laser art, laser games, laser control software
 - [sync.blue®](https://www.sync.blue) | Technology partner
