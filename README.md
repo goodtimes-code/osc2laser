@@ -88,8 +88,7 @@ As a user, feel free to create any issue.
 If you are Python developer, feel free to create a pull request. 
 
 ## OSC receiver
-- More installers
-  - MacOS
+- More binary releases
   - Windows
   - Linux
 - More laser objects
