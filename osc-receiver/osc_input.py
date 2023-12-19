@@ -1,4 +1,4 @@
-from models import LaserPoint, Blank, StaticLine, StaticWave, Effect, AnimatedWave
+from models import LaserPoint, Blank, StaticLine, StaticWave, Effect, AnimatedWave, StaticCircle
 import logging
 import configparser
 import time
@@ -100,6 +100,7 @@ def setup():
         StaticLine(laser_point3, laser_point4, 0), # Red vertical line
         StaticWave(0), # Blue static wave
         AnimatedWave(0), # Blue animated wave
+        StaticCircle(int(global_data.config['laser_output']['height'])/2, int(global_data.config['laser_output']['width'])/2, int(global_data.config['laser_output']['height'])/5, 0, 100, 0, 0) # Green static circle
     ]
 
 setup()

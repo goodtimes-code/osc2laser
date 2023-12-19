@@ -19,7 +19,7 @@ height = 4095
 # max: see laser device specification
 # if too high: unsharp edges
 # if too low = flickering output
-scan_rate = 40000
+scan_rate = 30000
 
 # Laser power (intensity, brightness)
 # min: 0.01
@@ -37,7 +37,7 @@ blank_point_frames = 40
 # min: 100
 # if too low: edges look distorted
 # if too high: flickering output
-interpolated_points = 100
+interpolated_points = 60
 
 [laser_preview]
 # laser_output dimensions are divided by this factor
