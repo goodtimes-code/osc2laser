@@ -20,7 +20,7 @@ def get_optimized_point_list():
         visible_laser_object.update()
 
         # Prepare effects
-        rgb_intensity = 255
+        rgb_intensity = 0
         y_shift = 0
         x_shift = 0
         
@@ -57,7 +57,7 @@ def get_optimized_point_list():
                     setattr(optimized_laser_point, color, 0)
      
             # Interpolate points for objects with small number of points
-            if previously_optimized_laser_point and len(visible_laser_object.point_list) < 80:
+            if previously_optimized_laser_point and len(visible_laser_object.point_list) < int(global_data.config['laser_output']['interpolated_points']):
                 interpolated_x_coords = np.linspace(previously_optimized_laser_point.x, optimized_laser_point.x, num=int(global_data.config['laser_output']['interpolated_points']))
                 interpolated_y_coords = np.linspace(previously_optimized_laser_point.y, optimized_laser_point.y, num=int(global_data.config['laser_output']['interpolated_points']))
 
@@ -71,6 +71,8 @@ def get_optimized_point_list():
                 optimized_point_list.append(optimized_laser_point)
 
             previously_optimized_laser_point = optimized_laser_point
+        
+        
 
         # Add blank point at end of laser object
         blank_point_end = copy(blank_point)
