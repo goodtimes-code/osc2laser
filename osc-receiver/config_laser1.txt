@@ -25,7 +25,7 @@ scan_rate = 30000
 # min: 0.01
 # max: 1.0 (=100% intensity)
 #intensity_factor = 0.7
-intensity_factor = 0.7
+intensity_factor = 0.5
 
 # How often blank points (at the beginning of each new laser object) shall be repeated
 # min: 1

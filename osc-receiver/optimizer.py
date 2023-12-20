@@ -6,26 +6,16 @@ from copy import copy
 import global_data
 import time
 
-# Efficiently optimize point list with effects and blank points
 def get_optimized_point_list():
     optimized_point_list = []
     
-    #visible_laser_objects_count = len(global_data.visible_laser_objects)
-    #if visible_laser_objects_count == 0:
-    #    print("Waiting for laser objects...")
-    #    time.sleep(1)
-        
     for visible_laser_object in global_data.visible_laser_objects:
-        # Update anomated laser objects
         visible_laser_object.update()
 
-        # Prepare effects
         rgb_intensity = 0
         y_shift = 0
         x_shift = 0
-        
-        #print("DEBUG: amount effects: " + str(len(visible_laser_object.effects)))
-        #time.sleep(5)
+
         for effect in visible_laser_object.effects:
             if effect.name == 'RGB_INTENSITY':
                 rgb_intensity = effect.level
@@ -33,30 +23,24 @@ def get_optimized_point_list():
                 x_shift = effect.level
             elif effect.name == 'Y_POS':
                 y_shift = effect.level
-        
-        # Add a blank point before every laser object
+
         blank_point_frames = int(global_data.config['laser_output']['blank_point_frames'])
         blank_point = LaserPoint(visible_laser_object.point_list[0].x + x_shift, visible_laser_object.point_list[0].y + y_shift)
         blank_point.set_color(0, 0, 0)
         optimized_point_list.extend([copy(blank_point)] * blank_point_frames)
 
-        # Process each point in the laser object
         previously_optimized_laser_point = None
         for laser_point in visible_laser_object.point_list:
             optimized_laser_point = copy(laser_point)
-            
-            # X/Y position
             optimized_laser_point.x += x_shift
             optimized_laser_point.y += y_shift
-            
-            # RGB intensity
+
             for color in ['r', 'g', 'b']:
                 if rgb_intensity > 0:
                     setattr(optimized_laser_point, color, getattr(optimized_laser_point, color) / 255 * rgb_intensity)
                 else:
                     setattr(optimized_laser_point, color, 0)
-     
-            # Interpolate points for objects with small number of points
+
             if previously_optimized_laser_point and len(visible_laser_object.point_list) < int(global_data.config['laser_output']['interpolated_points']):
                 interpolated_x_coords = np.linspace(previously_optimized_laser_point.x, optimized_laser_point.x, num=int(global_data.config['laser_output']['interpolated_points']))
                 interpolated_y_coords = np.linspace(previously_optimized_laser_point.y, optimized_laser_point.y, num=int(global_data.config['laser_output']['interpolated_points']))
@@ -66,21 +50,30 @@ def get_optimized_point_list():
                     interpolated_point.x = x
                     interpolated_point.y = y
                     optimized_point_list.append(interpolated_point)
-
             else:
                 optimized_point_list.append(optimized_laser_point)
 
             previously_optimized_laser_point = optimized_laser_point
-        
-        
 
-        # Add blank point at end of laser object
         blank_point_end = copy(blank_point)
         optimized_point_list.append(blank_point_end)
 
-        # Remove laser points out of screen coordinates
         screen_width = int(global_data.config['laser_output']['width'])
         screen_height = int(global_data.config['laser_output']['height'])
-        optimized_point_list = [pt for pt in optimized_point_list if 0 < pt.x < screen_width and 0 < pt.y < screen_height]
+        
+        # New logic for handling points out of screen
+        new_optimized_point_list = []
+        for pt in optimized_point_list:
+            if 0 <= pt.x <= screen_width and 0 <= pt.y <= screen_height:
+                new_optimized_point_list.append(pt)
+            else:
+                # Add a blank point near the border instead of removing the point
+                border_point = copy(blank_point)
+                border_point.x = max(0, min(pt.x, screen_width))
+                border_point.y = max(0, min(pt.y, screen_height))
+                new_optimized_point_list.append(border_point)
+
+        optimized_point_list = new_optimized_point_list
 
     return optimized_point_list
+
