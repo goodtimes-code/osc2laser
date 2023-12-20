@@ -76,4 +76,3 @@ def get_optimized_point_list():
         optimized_point_list = new_optimized_point_list
 
     return optimized_point_list
-
