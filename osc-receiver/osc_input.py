@@ -34,7 +34,8 @@ def handle_osc_message(address, *args):
         effect_names = {
             "/effect/x_pos": "X_POS",
             "/effect/y_pos": "Y_POS",
-            "/effect/rgb_intensity": "RGB_INTENSITY"
+            "/effect/rgb_intensity": "RGB_INTENSITY",
+            "/effect/scale": "SCALE_FACTOR"
         }
         effect_name = effect_names.get(address, "UNKNOWN_EFFECT")
         if global_data.config['logging']['osc_server_effect_handling'] == 'yes':
