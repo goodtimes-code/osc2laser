@@ -1,7 +1,7 @@
 # Preamble
 osc2laser (*OSC to laser*) is a completely free, open source, solution to **create stunning lasershows** - live or pre-programmed by timeline.
 
-It enables you to simply control your showlasers via any OSC-compatible software (Ableton Live, TouchOSC, Vezér,...).
+It enables you to simply control your showlasers via any OSC-compatible software.
 
 ![Demo](osc-senders/max-for-live-device/doc/demo1.gif)
 
@@ -27,6 +27,7 @@ This projects is in an early stage to get feedback and to urgently find more con
 - Any supported Laser DAC:
   - [Helios Laser DAC](https://bitlasers.com/helios-laser-dac/)
 - Any software for sending OSC commands like:
+  - [open-stage-control](https://openstagecontrol.ammd.net/)
   - [Ableton Live](https://www.ableton.com/live/)
   - [Vezér](https://imimot.com/vezer/)
   - [TouchOSC](https://hexler.net/touchosc)
@@ -56,6 +57,14 @@ This starts an OSC server on *localhost* at UDP port *2345*.
 See *config_laser1.txt* for more optional settings.
 
 ## OSC sender
+### open-stage-control
+![Demo](osc-senders/open-stage-control/doc/open-stage-control-demo.gif)
+
+1. [Download](https://openstagecontrol.ammd.net/download/) and install software.
+2. Run and open profile *osc-senders/open-stage-control/osc2laser-client.config*.
+3. Click *play* icon.
+4. Open session *osc-senders/open-stage-control/osc2laser-template.config*.
+
 ### Max for Live device
 ![Demo](osc-senders/max-for-live-device/doc/setup.gif)
 
@@ -78,15 +87,14 @@ See *config_laser1.txt* for more optional settings.
   - 5 - green static circle
 - /effect/x_pos and /effect/x_pos
   - -4095 to 4095: move X or Y position of laserobject
+- /effect/xy_pos
+  - (-4095 to 4095, -4095 to 4095): move X and Y position of laserobject at once
 - /effect/rgb_intensity
   - 0 to 255: brightness of the RGB colors
 
 # Roadmap
 This is what needs to be worked on. 
-
-As a user, feel free to create any issue.
-
-If you are Python developer, feel free to create a pull request. 
+As a developer, feel free to commit your changes via pull request. 
 
 ## OSC receiver
 - More binary releases

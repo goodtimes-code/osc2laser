@@ -30,25 +30,35 @@ def handle_osc_message(address, *args):
             logging.error(f'[OSC] Error while adding new laser object: {e}')
             
     elif address.startswith("/effect/"):
-        pos = int(args[0])
-        effect_names = {
-            "/effect/x_pos": "X_POS",
-            "/effect/y_pos": "Y_POS",
-            "/effect/rgb_intensity": "RGB_INTENSITY"
-        }
-        effect_name = effect_names.get(address, "UNKNOWN_EFFECT")
-        if global_data.config['logging']['osc_server_effect_handling'] == 'yes':
-            logging.info(f"[OSC] Handling effect {effect_name}: {pos}")
+        if address == "/effect/xy_pos":
+            # Handle the combined XY position message
+            x_pos, y_pos = int(args[0]), int(args[1])
+            handle_effect("X_POS", x_pos)
+            handle_effect("Y_POS", y_pos)
+        else:
+            # Handle other effect messages
+            pos = int(args[0])
+            effect_names = {
+                "/effect/x_pos": "X_POS",
+                "/effect/y_pos": "Y_POS",
+                "/effect/rgb_intensity": "RGB_INTENSITY"
+            }
+            effect_name = effect_names.get(address, "UNKNOWN_EFFECT")
+            handle_effect(effect_name, pos)
 
-        for visible_laser_object in global_data.visible_laser_objects:
-            if visible_laser_object.group == 0:
-                if not visible_laser_object.has_effect(effect_name):
-                    effect = Effect(effect_name, pos)
-                    visible_laser_object.effects.append(effect)
-                else:
-                    for effect in visible_laser_object.effects:
-                        if effect.name == effect_name:
-                            effect.level = pos
+def handle_effect(effect_name, pos):
+    if global_data.config['logging']['osc_server_effect_handling'] == 'yes':
+        logging.info(f"[OSC] Handling effect {effect_name}: {pos}")
+
+    for visible_laser_object in global_data.visible_laser_objects:
+        if visible_laser_object.group == 0:
+            if not visible_laser_object.has_effect(effect_name):
+                effect = Effect(effect_name, pos)
+                visible_laser_object.effects.append(effect)
+            else:
+                for effect in visible_laser_object.effects:
+                    if effect.name == effect_name:
+                        effect.level = pos
 
 
 def process_osc_input():    
@@ -57,6 +67,7 @@ def process_osc_input():
     disp.map("/laserobject", handle_osc_message)
     disp.map("/effect/x_pos", handle_osc_message)
     disp.map("/effect/y_pos", handle_osc_message)
+    disp.map("/effect/xy_pos", handle_osc_message)  # Added mapping for /effect/xy_pos
     disp.map("/effect/rgb_intensity", handle_osc_message)
 
     server = osc_server.ThreadingOSCUDPServer(
@@ -104,9 +115,3 @@ def setup():
     ]
 
 setup()
-
-# Test
-#print("[OSC] Show test laser object...")
-#laser_object = global_data.NOTE_LASEROBJECT_MAPPING[0][1]
-#laser_object.group = 0
-#global_data.visible_laser_objects.append(laser_object)
