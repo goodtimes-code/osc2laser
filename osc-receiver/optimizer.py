@@ -7,15 +7,6 @@ import global_data
 import time
 
 def apply_effects_to_laser_points(visible_laser_object):
-    """
-    Applies effects to all points in a visible laser object based on the effects defined in it.
-
-    Parameters:
-    - visible_laser_object: The laser object with points and effects.
-
-    Returns:
-    - A list of points with applied effects like position shift and RGB intensity.
-    """
     optimized_points = []
     rgb_intensity, x_shift, y_shift, scale_factor = 255, 0, 0, 1
 
@@ -29,33 +20,33 @@ def apply_effects_to_laser_points(visible_laser_object):
             y_shift = effect.level
         elif effect.name == 'SCALE_FACTOR':
             scale_factor = effect.level
-            
-    # Settings for effect: SCALE_FACTOR
-    if scale_factor == 0:
-        scale_factor = 1  # Prevent division by zero or scaling to a point
-        
-    # Determine the reference point for scaling
-    ref_x, ref_y = visible_laser_object.point_list[0].x, visible_laser_object.point_list[0].y
-    
-    # Apply the extracted effects to each point
-    for laser_point in visible_laser_object.point_list:
-        optimized_point = copy(laser_point)
-        
-        # Apply effect: X_POS and Y_POS
-        optimized_point.x += x_shift
-        optimized_point.y += y_shift
 
-        # Apply effect: RGB_INTENSITY
+    # Apply X_POS and Y_POS effects and calculate the new geometric center
+    shifted_points = []
+    for laser_point in visible_laser_object.point_list:
+        shifted_point = copy(laser_point)
+        shifted_point.x += x_shift
+        shifted_point.y += y_shift
+        shifted_points.append(shifted_point)
+
+    total_x, total_y = sum(p.x for p in shifted_points), sum(p.y for p in shifted_points)
+    center_x, center_y = total_x / len(shifted_points), total_y / len(shifted_points)
+
+    # Apply SCALE_FACTOR and RGB_INTENSITY effects
+    for shifted_point in shifted_points:
+        optimized_point = copy(shifted_point)
+
+        # Apply RGB_INTENSITY effect
         for color in ['r', 'g', 'b']:
             if rgb_intensity > 0:
                 setattr(optimized_point, color, getattr(optimized_point, color) / 255 * rgb_intensity)
             else:
                 setattr(optimized_point, color, 0)
-        
-        # Apply effect: SCALE_FACTOR
-        optimized_point.x = ref_x + (optimized_point.x - ref_x) * scale_factor
-        optimized_point.y = ref_y + (optimized_point.y - ref_y) * scale_factor
-        
+
+        # Apply SCALE_FACTOR effect
+        optimized_point.x = center_x + (shifted_point.x - center_x) * scale_factor
+        optimized_point.y = center_y + (shifted_point.y - center_y) * scale_factor
+
         optimized_points.append(optimized_point)
 
     return optimized_points
