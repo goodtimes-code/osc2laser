@@ -17,7 +17,7 @@ def apply_effects_to_laser_points(visible_laser_object):
     - A list of points with applied effects like position shift and RGB intensity.
     """
     optimized_points = []
-    rgb_intensity, x_shift, y_shift = 0, 0, 0
+    rgb_intensity, x_shift, y_shift = 255, 0, 0
 
     # Extracting effect levels from the visible laser object
     for effect in visible_laser_object.effects:
@@ -84,30 +84,29 @@ def adjust_points_for_screen(optimized_point_list, screen_width, screen_height, 
     return new_optimized_point_list
 
 def get_optimized_point_list():
-    """
-    Generates an optimized list of points for laser output. This includes applying effects,
-    interpolating points, and adjusting for screen boundaries.
-
-    Parameters:
-    - global_data: Global data containing configuration and visible laser objects.
-
-    Returns:
-    - A list of optimized laser points.
-    """
     optimized_point_list = []
+    
     for visible_laser_object in global_data.visible_laser_objects:
         visible_laser_object.update()
 
         applied_points = apply_effects_to_laser_points(visible_laser_object)
-
-        # Add initial blank points to avoid sudden jumps in the laser projection.
-        blank_point_frames = int(global_data.config['laser_output']['blank_point_frames'])
+        
+        # Setup blank point for later use
         blank_point = LaserPoint(applied_points[0].x, applied_points[0].y)
         blank_point.set_color(0, 0, 0)
-        optimized_point_list.extend([copy(blank_point)] * blank_point_frames)
+
+        # Check if the shape has the same start and end points
+        same_start_end_points = (applied_points[0].x == applied_points[-1].x and 
+                                 applied_points[0].y == applied_points[-1].y)
+
+        # Add initial blank points only if start and end points are different
+        if not same_start_end_points:
+            blank_point_frames = int(global_data.config['laser_output']['blank_point_frames'])
+            optimized_point_list.extend([copy(blank_point)] * blank_point_frames)
 
         previously_optimized_laser_point = None
         for optimized_point in applied_points:
+            
             if previously_optimized_laser_point and len(visible_laser_object.point_list) < int(global_data.config['laser_output']['interpolated_points']):
                 interpolated_x_coords, interpolated_y_coords = interpolate_points(previously_optimized_laser_point, optimized_point, int(global_data.config['laser_output']['interpolated_points']))
 
@@ -121,9 +120,10 @@ def get_optimized_point_list():
 
             previously_optimized_laser_point = optimized_point
 
-        # Add a blank point at the end to ensure a smooth transition at the end of the sequence.
-        blank_point_end = copy(blank_point)
-        optimized_point_list.append(blank_point_end)
+        # Add a blank point at the end to ensure a smooth transition, only if start and end points are different
+        if not same_start_end_points:
+            blank_point_end = copy(blank_point)
+            optimized_point_list.append(blank_point_end)
 
         screen_width = int(global_data.config['laser_output']['width'])
         screen_height = int(global_data.config['laser_output']['height'])
@@ -132,3 +132,4 @@ def get_optimized_point_list():
         optimized_point_list = adjust_points_for_screen(optimized_point_list, screen_width, screen_height, blank_point)
 
     return optimized_point_list
+
