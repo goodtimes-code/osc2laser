@@ -93,7 +93,7 @@ See *config_laser1.txt* for more optional settings.
 - /effect/rgb_intensity
   - 0 to 255: brightness of the RGB colors
 - /effect/scale_factor
-  - -10 to 10: scaling factor of shape (1 = no scale)
+  - -10 to 10: scaling factor of shape (1 = no scale) 
 
 # Roadmap
 This is what needs to be worked on. 
