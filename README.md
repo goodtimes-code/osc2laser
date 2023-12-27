@@ -108,7 +108,6 @@ As a developer, feel free to commit your changes via pull request.
   - SVG file
   - ...
 - More laser effects
-  - Scale
   - Rotate
   - Dots
   - Scan rate
