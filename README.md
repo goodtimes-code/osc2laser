@@ -21,6 +21,7 @@ This projects is in an early stage to get feedback and to urgently find more con
   - X position
   - Y position
   - RGB intensity ("brightness")
+  - Scale factor
 
 # System requirements
 - Python 3 runtime
@@ -91,6 +92,8 @@ See *config_laser1.txt* for more optional settings.
   - (-4095 to 4095, -4095 to 4095): move X and Y position of laserobject at once
 - /effect/rgb_intensity
   - 0 to 255: brightness of the RGB colors
+- /effect/scale_factor
+  - -10 to 10: scaling factor of shape (1 = no scale)
 
 # Roadmap
 This is what needs to be worked on. 
