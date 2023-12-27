@@ -81,29 +81,29 @@ class StaticLine(LaserObject):
  
 class StaticCircle(LaserObject):
     def __init__(self, center_x, center_y, radius, r, g, b, group=0):
-        import math
+        super().__init__()
 
         self.group = group
         self.point_list = []
         self.effects = []
 
-        # the lower this value the higher quality the circle is with more points generated
-        step_size = 0.1
+        # Number of points to create the circle
+        points_count = 100  # This can be adjusted for smoother circles
 
-        # generated vertices
-        points_count = int(2 * math.pi / step_size) + 1
-        
-        # calculate points
-        t = 0
-        i = 0
-        first_x = int(round(radius * math.cos(0) + center_x, 0))
-        first_y = int(round(radius * math.sin(0) + center_y, 0))
-        while t < 2 * math.pi:
-            laser_point = LaserPoint(int(round(radius * math.cos(t) + center_x, 0)), int(round(radius * math.sin(t) + center_y, 0)))
+        # Calculate the angle step size
+        step_size = 2 * math.pi / points_count
+
+        # Create points
+        for i in range(points_count + 1):  # +1 to close the circle
+            t = step_size * i
+            x = int(round(radius * math.cos(t) + center_x, 0))
+            y = int(round(radius * math.sin(t) + center_y, 0))
+            laser_point = LaserPoint(x, y)
             laser_point.set_color(r, g, b)
             self.point_list.append(laser_point)
-            t += step_size
-            i += 1
+
+        # Ensure the last point is the same as the first to close the circle
+        self.point_list.append(self.point_list[0])
 
 
 class StaticWave(LaserObject):
