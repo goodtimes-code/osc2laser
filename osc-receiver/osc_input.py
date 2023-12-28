@@ -42,7 +42,8 @@ def handle_osc_message(address, *args):
                 "/effect/x_pos": "X_POS",
                 "/effect/y_pos": "Y_POS",
                 "/effect/rgb_intensity": "RGB_INTENSITY",
-                "/effect/scale_factor": "SCALE_FACTOR"
+                "/effect/scale_factor": "SCALE_FACTOR",
+                "/effect/rotation_degrees": "ROTATION_DEGREES"
             }
             effect_name = effect_names.get(address, "UNKNOWN_EFFECT")
             handle_effect(effect_name, pos)
@@ -71,6 +72,7 @@ def process_osc_input():
     disp.map("/effect/xy_pos", handle_osc_message)
     disp.map("/effect/rgb_intensity", handle_osc_message)
     disp.map("/effect/scale_factor", handle_osc_message)
+    disp.map("/effect/rotation_degrees", handle_osc_message)
 
     server = osc_server.ThreadingOSCUDPServer(
         (global_data.config['osc_server']['ip'], int(global_data.config['osc_server']['port'])), disp)

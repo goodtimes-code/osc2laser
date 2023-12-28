@@ -5,10 +5,11 @@ from models import LaserPoint
 from copy import copy
 import global_data
 import time
+import math
 
 def apply_effects_to_laser_points(visible_laser_object):
     optimized_points = []
-    rgb_intensity, x_shift, y_shift, scale_factor = 255, 0, 0, 1
+    rgb_intensity, x_shift, y_shift, scale_factor, rotation_degrees = 255, 0, 0, 1, 0
 
     # Extracting effect levels from the visible laser object
     for effect in visible_laser_object.effects:
@@ -20,6 +21,8 @@ def apply_effects_to_laser_points(visible_laser_object):
             y_shift = effect.level
         elif effect.name == 'SCALE_FACTOR':
             scale_factor = effect.level
+        elif effect.name == 'ROTATION_DEGREES':
+            rotation_degrees = effect.level
 
     # Apply X_POS and Y_POS effects and calculate the new geometric center
     shifted_points = []
@@ -32,7 +35,10 @@ def apply_effects_to_laser_points(visible_laser_object):
     total_x, total_y = sum(p.x for p in shifted_points), sum(p.y for p in shifted_points)
     center_x, center_y = total_x / len(shifted_points), total_y / len(shifted_points)
 
-    # Apply SCALE_FACTOR and RGB_INTENSITY effects
+    # Convert rotation degrees to radians
+    rotation_radians = math.radians(rotation_degrees)
+
+    # Apply SCALE_FACTOR, RGB_INTENSITY, and ROTATION_DEGREES effects
     for shifted_point in shifted_points:
         optimized_point = copy(shifted_point)
 
@@ -47,9 +53,15 @@ def apply_effects_to_laser_points(visible_laser_object):
         optimized_point.x = center_x + (shifted_point.x - center_x) * scale_factor
         optimized_point.y = center_y + (shifted_point.y - center_y) * scale_factor
 
+        # Apply ROTATION_DEGREES effect
+        dx, dy = optimized_point.x - center_x, optimized_point.y - center_y
+        optimized_point.x = center_x + dx * math.cos(rotation_radians) - dy * math.sin(rotation_radians)
+        optimized_point.y = center_y + dx * math.sin(rotation_radians) + dy * math.cos(rotation_radians)
+
         optimized_points.append(optimized_point)
 
     return optimized_points
+
 
 def interpolate_points(point1, point2, num_points):
     """
