@@ -39,9 +39,8 @@ class LaserPoint():
 class LaserObject():
     # every interface implementation must provide these attributes:
     # - group
-    # - point_list
-    # - effects
     
+    point_list = []
     effects = []
 
     def has_effect(self, effect_name) -> bool:
@@ -60,9 +59,9 @@ class LaserObject():
 class Blank(LaserObject):
 
     def __init__(self, group = 0):
+        self.point_list = []
         self.group = group
 
-        self.point_list = []
         blank_point = LaserPoint(0, 0)
         blank_point.set_color(0, 0, 0)
         self.point_list.append(blank_point)
@@ -71,9 +70,9 @@ class Blank(LaserObject):
 class StaticLine(LaserObject):
 
     def __init__(self, from_point, to_point, group = 0):
+        self.point_list = []
         self.group = group
 
-        self.point_list = []
         self.point_list.append(from_point)
         self.point_list.append(to_point)
 
@@ -82,8 +81,8 @@ class StaticCircle(LaserObject):
     def __init__(self, center_x, center_y, radius, r, g, b, group=0):
         super().__init__()
 
-        self.group = group
         self.point_list = []
+        self.group = group
 
         # Number of points to create the circle
         points_count = 100  # This can be adjusted for smoother circles
@@ -108,8 +107,7 @@ class StaticWave(LaserObject):
     from models import LaserPoint
 
     def __init__(self, group = 0):
-        import math
-
+        self.point_list = []
         self.group = group
         
         # Set up wave properties
@@ -118,7 +116,6 @@ class StaticWave(LaserObject):
         self.frequency = 3
         self.vertical_shift = int(global_data.config['laser_output']['height']) / 2
 
-        self.point_list = []
         for x in range(0, int(global_data.config['laser_output']['width']), 50):
             y = math.sin((2 * math.pi * self.frequency * x) / self.wave_length) * self.amplitude + self.vertical_shift
             laser_point = LaserPoint(int(x), int(y))
@@ -129,14 +126,16 @@ class StaticWave(LaserObject):
 class AnimatedWave(StaticWave):
     def __init__(self, group=0, animation_speed=0.5, amplitude_mod=0, frequency_mod=0, noise_intensity=0):
         super().__init__(group)
+        
+        self.point_list = []
+        self.group = group
+        
         self.animation_progress = 0
         self.animation_speed = animation_speed
         self.amplitude_mod = amplitude_mod
         self.frequency_mod = frequency_mod
         self.noise_intensity = noise_intensity
-        
-        self.group = group
-        
+
     def update(self):
         self.animation_progress += self.animation_speed
 
