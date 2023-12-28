@@ -35,13 +35,10 @@ class LaserPoint():
         return ('X:' + str(self.x) + ', Y:' + str(self.y) + ', R:' + str(self.r) + ', G:' + str(self.g) + ', B:' + str(self.b) + ', Blank: ' + str(self.is_blank()))
 
 
-# TODO: make it an interface
-class LaserObject():
-    # every interface implementation must provide these attributes:
-    # - group
-    
+class LaserObject():    
     point_list = []
     effects = []
+    group = 0
 
     def has_effect(self, effect_name) -> bool:
         for effect in self.effects:
