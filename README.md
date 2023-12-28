@@ -7,17 +7,15 @@ It enables you to simply control your showlasers via any OSC-compatible software
 
 *2D laser preview of animated timeline using Ableton Live*
 
-# Release status
-*Proof of concept* 
-
-This projects is in an early stage to get feedback and to urgently find more contributors. Not ready for production usage.
-
 # Features
-- Laser output preview (2D)
+- Easy laser output preview (2D)
 
-- Pre-defined laser objects
+- Multiple static and animated [laser objects](#laser-objects)
+  - Line
+  - Circle
+  - Wave
 
-- Effects:
+- [Effects](#effects):
   - X position
   - Y position
   - RGB intensity ("brightness")
@@ -80,6 +78,7 @@ See *config_laser1.txt* for more optional settings.
 6. Add key frames to the automation lanes and watch the output in the laser preview window.
 
 # OSC messages
+## Laser objects
 - /laserobject
   - 0 = blank
   - 1 = green horizontal line
@@ -87,6 +86,8 @@ See *config_laser1.txt* for more optional settings.
   - 3 = blue static wave
   - 4 - blue animated wave
   - 5 - green static circle
+
+## Effects
 - /effect/x_pos and /effect/x_pos
   - -4095 to 4095: move X or Y position of laserobject
 - /effect/xy_pos
