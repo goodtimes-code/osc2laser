@@ -22,6 +22,7 @@ This projects is in an early stage to get feedback and to urgently find more con
   - Y position
   - RGB intensity ("brightness")
   - Scale factor
+  - Rotation
 
 # System requirements
 - Python 3 runtime
@@ -93,7 +94,9 @@ See *config_laser1.txt* for more optional settings.
 - /effect/rgb_intensity
   - 0 to 255: brightness of the RGB colors
 - /effect/scale_factor
-  - -10 to 10: scaling factor of shape (1 = no scale) 
+  - -10 to 10: scaling factor of shape (1 = no scale)
+- /effect/rotation_degrees
+  - 0 to 360: degrees of static rotation (0 = no rotation)
 
 # Roadmap
 This is what needs to be worked on. 
@@ -108,7 +111,6 @@ As a developer, feel free to commit your changes via pull request.
   - SVG file
   - ...
 - More laser effects
-  - Rotate
   - Dots
   - Scan rate
   - ...
