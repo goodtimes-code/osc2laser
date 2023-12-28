@@ -1,5 +1,6 @@
 import global_data
 import math
+import random
 
 
 class Effect():
@@ -40,6 +41,8 @@ class LaserObject():
     # - group
     # - point_list
     # - effects
+    
+    effects = []
 
     def has_effect(self, effect_name) -> bool:
         for effect in self.effects:
@@ -63,8 +66,6 @@ class Blank(LaserObject):
         blank_point = LaserPoint(0, 0)
         blank_point.set_color(0, 0, 0)
         self.point_list.append(blank_point)
-        
-        self.effects = []
 
 
 class StaticLine(LaserObject):
@@ -76,8 +77,6 @@ class StaticLine(LaserObject):
         self.point_list.append(from_point)
         self.point_list.append(to_point)
 
-        self.effects = []
-
  
 class StaticCircle(LaserObject):
     def __init__(self, center_x, center_y, radius, r, g, b, group=0):
@@ -85,7 +84,6 @@ class StaticCircle(LaserObject):
 
         self.group = group
         self.point_list = []
-        self.effects = []
 
         # Number of points to create the circle
         points_count = 100  # This can be adjusted for smoother circles
@@ -113,8 +111,7 @@ class StaticWave(LaserObject):
         import math
 
         self.group = group
-        self.effects = []
-
+        
         # Set up wave properties
         self.wave_length = int(global_data.config['laser_output']['width'])
         self.amplitude = 500
@@ -127,38 +124,48 @@ class StaticWave(LaserObject):
             laser_point = LaserPoint(int(x), int(y))
             laser_point.set_color(0, 0, 150)
             self.point_list.append(laser_point)
-            
+
 
 class AnimatedWave(StaticWave):
-    def __init__(self, group=0, animation_speed=0.5):
+    def __init__(self, group=0, animation_speed=0.5, amplitude_mod=0, frequency_mod=0, noise_intensity=0):
         super().__init__(group)
         self.animation_progress = 0
         self.animation_speed = animation_speed
+        self.amplitude_mod = amplitude_mod
+        self.frequency_mod = frequency_mod
+        self.noise_intensity = noise_intensity
         
         self.group = group
-        self.effects = []
-
+        
     def update(self):
-        # Increment the animation progress
         self.animation_progress += self.animation_speed
 
-        # Clear the point list
         self.point_list = []
 
-        # Add points to the point list
         for x in range(0, self.wave_length, 50):
-            # Update the y value based on the current animation progress
-            # Subtracting animation_progress from x to shift in the opposite direction
-            y = math.sin((2 * math.pi * self.frequency * (x - self.animation_progress)) / self.wave_length) * self.amplitude + self.vertical_shift
+            # Varying amplitude and frequency with new parameters
+            varied_amplitude = self.amplitude + math.sin(x / 100.0) * self.amplitude_mod
+            varied_frequency = self.frequency + math.sin(x / 200.0) * self.frequency_mod
 
-            # Create a new laser point at this position
+            # Base sine wave
+            y = math.sin((2 * math.pi * varied_frequency * (x - self.animation_progress)) / self.wave_length) * varied_amplitude
+
+            # Additional wave for complexity (only if modulation is applied)
+            if self.amplitude_mod != 0 or self.frequency_mod != 0:
+                y += math.sin((4 * math.pi * varied_frequency * (x - self.animation_progress)) / self.wave_length) * (varied_amplitude / 3)
+
+            # Noise addition (only if noise intensity is not zero)
+            if self.noise_intensity != 0:
+                y += random.uniform(-self.noise_intensity, self.noise_intensity)
+
+            # Applying vertical shift
+            y += self.vertical_shift
+
             laser_point = LaserPoint(int(x), int(y))
-
-            # Set the color of the laser point
             laser_point.set_color(0, 0, 100)
-
-            # Add the laser point to the point list
             self.point_list.append(laser_point)
+
+
 
 
 
