@@ -90,6 +90,7 @@ See *config_laser1.txt* for more optional settings.
   - 3 = blue static wave
   - 4 - blue animated wave
   - 5 - green static circle
+  - 6 - green static point
 
 ## Effects
 - /effect/x_pos and /effect/x_pos
