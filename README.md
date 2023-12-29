@@ -140,4 +140,4 @@ Join our [Discord](https://discord.gg/3JKDDWr9w6) server to discuss your ideas a
 
 # Sponsors
 - [goodtimes](https://www.goodtimes.technology) | Interactive showlaser technology: lasershows, laser art, laser games, laser control software
-- [sync.blue®](https://www.sync.blue) | Technology partner
+- [sync.blue®](https://www.sync.blue) | Technology partner 
