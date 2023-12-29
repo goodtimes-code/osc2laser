@@ -21,7 +21,7 @@ def process_laser_output():
 
     def initialize():
         global HeliosLib
-        HeliosLib = ctypes.cdll.LoadLibrary("./libHeliosDacAPI.so")
+        HeliosLib = ctypes.cdll.LoadLibrary("./" + global_data.config['laser_output']['driver_name'])
         numDevices = HeliosLib.OpenDevices()
         logging.info('[LaserOut] Found ' + str(numDevices) + ' Helios DACs')
 

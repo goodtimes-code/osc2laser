@@ -73,6 +73,16 @@ class StaticLine(LaserObject):
         self.point_list.append(from_point)
         self.point_list.append(to_point)
 
+        self.effects = []
+
+class StaticPoint(LaserObject):
+    def __init__(self, target_point,group = 0):
+        self.group = group
+
+        self.point_list = []
+        self.point_list.append(target_point)
+
+        self.effects = []
  
 class StaticCircle(LaserObject):
     def __init__(self, center_x, center_y, radius, r, g, b, group=0):
