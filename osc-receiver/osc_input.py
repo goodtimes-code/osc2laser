@@ -76,6 +76,9 @@ def process_osc_input():
     disp.map("/effect/rgb_intensity", handle_osc_message)
     disp.map("/effect/scale_factor", handle_osc_message)
     disp.map("/effect/rotation_degrees", handle_osc_message)
+    disp.map("/effect/color_change/r", handle_osc_message)
+    disp.map("/effect/color_change/g", handle_osc_message)
+    disp.map("/effect/color_change/b", handle_osc_message)
 
     server = osc_server.ThreadingOSCUDPServer(
         (global_data.config['osc_server']['ip'], int(global_data.config['osc_server']['port'])), disp)

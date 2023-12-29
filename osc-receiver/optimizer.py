@@ -25,10 +25,8 @@ def apply_effects_to_laser_points(visible_laser_object):
             rotation_degrees = effect.level
         elif effect.name == 'COLOR_CHANGE_R':
             color_r = effect.level
-            print("Wert Input R:"+effect.level)
         elif effect.name == 'COLOR_CHANGE_G':
             color_g = effect.level
-            print("Wert Input R:"+effect.level)
         elif effect.name == 'COLOR_CHANGE_B':
             color_b = effect.level
 
@@ -42,12 +40,10 @@ def apply_effects_to_laser_points(visible_laser_object):
 
         if color_r:
             shifted_point.r = color_r
-            print("Wert R:"+color_r)
         if color_b: 
             shifted_point.b = color_b
         if color_g:
             shifted_point.g = color_g
-            print("Wert G:"+color_g)
 
     total_x, total_y = sum(p.x for p in shifted_points), sum(p.y for p in shifted_points)
     center_x, center_y = total_x / len(shifted_points), total_y / len(shifted_points)
