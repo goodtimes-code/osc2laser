@@ -9,7 +9,7 @@ import math
 
 def apply_effects_to_laser_points(visible_laser_object):
     optimized_points = []
-    rgb_intensity, x_shift, y_shift, scale_factor, rotation_degrees = 255, 0, 0, 1, 0
+    rgb_intensity, x_shift, y_shift, scale_factor, rotation_degrees,color_r,color_g,color_b = 255, 0, 0, 1, 0, None, None, None
 
     # Extracting effect levels from the visible laser object
     for effect in visible_laser_object.effects:
@@ -23,6 +23,14 @@ def apply_effects_to_laser_points(visible_laser_object):
             scale_factor = effect.level
         elif effect.name == 'ROTATION_DEGREES':
             rotation_degrees = effect.level
+        elif effect.name == 'COLOR_CHANGE_R':
+            color_r = effect.level
+            print("Wert Input R:"+effect.level)
+        elif effect.name == 'COLOR_CHANGE_G':
+            color_g = effect.level
+            print("Wert Input R:"+effect.level)
+        elif effect.name == 'COLOR_CHANGE_B':
+            color_b = effect.level
 
     # Apply X_POS and Y_POS effects and calculate the new geometric center
     shifted_points = []
@@ -31,6 +39,15 @@ def apply_effects_to_laser_points(visible_laser_object):
         shifted_point.x += x_shift
         shifted_point.y += y_shift
         shifted_points.append(shifted_point)
+
+        if color_r:
+            shifted_point.r = color_r
+            print("Wert R:"+color_r)
+        if color_b: 
+            shifted_point.b = color_b
+        if color_g:
+            shifted_point.g = color_g
+            print("Wert G:"+color_g)
 
     total_x, total_y = sum(p.x for p in shifted_points), sum(p.y for p in shifted_points)
     center_x, center_y = total_x / len(shifted_points), total_y / len(shifted_points)

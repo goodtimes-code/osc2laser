@@ -43,7 +43,10 @@ def handle_osc_message(address, *args):
                 "/effect/y_pos": "Y_POS",
                 "/effect/rgb_intensity": "RGB_INTENSITY",
                 "/effect/scale_factor": "SCALE_FACTOR",
-                "/effect/rotation_degrees": "ROTATION_DEGREES"
+                "/effect/rotation_degrees": "ROTATION_DEGREES",
+                "/effect/color_change/r": "COLOR_CHANGE_R",
+                "/effect/color_change/g": "COLOR_CHANGE_G",
+                "/effect/color_change/b": "COLOR_CHANGE_B"
             }
             effect_name = effect_names.get(address, "UNKNOWN_EFFECT")
             handle_effect(effect_name, pos)
