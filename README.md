@@ -27,10 +27,14 @@ It enables you to simply control your showlasers via any OSC-compatible software
 - Any supported Laser DAC:
   - [Helios Laser DAC](https://bitlasers.com/helios-laser-dac/)
 - Any software for sending OSC commands like:
-  - [open-stage-control](https://openstagecontrol.ammd.net/)
+  - [open-stage-control](https://openstagecontrol.ammd.net/) (free)
   - [Ableton Live](https://www.ableton.com/live/)
   - [Vezér](https://imimot.com/vezer/)
   - [TouchOSC](https://hexler.net/touchosc)
+  - Chataigne (free)
+  - OSSIA score (free)
+  - Millumin
+  - QLab
   - ...
 
 For *Max for Live* developers:
