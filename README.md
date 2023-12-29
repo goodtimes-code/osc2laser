@@ -9,18 +9,8 @@ It enables you to simply control your showlasers via any OSC-compatible software
 
 # Features
 - Easy laser output preview (2D)
-
 - Multiple static and animated [laser objects](#laser-objects)
-  - Line
-  - Circle
-  - Wave
-
-- [Effects](#effects):
-  - X position
-  - Y position
-  - RGB intensity ("brightness")
-  - Scale factor
-  - Rotation
+- [Effects](#effects)
 
 # System requirements
 - Python 3 runtime
@@ -90,6 +80,7 @@ See *config_laser1.txt* for more optional settings.
   - 3 = blue static wave
   - 4 - blue animated wave
   - 5 - green static circle
+  - 6 - green static point
 
 ## Effects
 - /effect/x_pos and /effect/x_pos
@@ -102,6 +93,8 @@ See *config_laser1.txt* for more optional settings.
   - -10 to 10: scaling factor of shape (1 = no scale)
 - /effect/rotation_degrees
   - 0 to 360: degrees of static rotation (0 = no rotation)
+- /effect/color_change/[r, g, b]
+  - 0 to 255: color intensity of red, green and blue
 
 # Roadmap
 This is what needs to be worked on. 
