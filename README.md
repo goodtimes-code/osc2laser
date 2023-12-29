@@ -31,6 +31,9 @@ It enables you to simply control your showlasers via any OSC-compatible software
   - [Ableton Live](https://www.ableton.com/live/)
   - [Vezér](https://imimot.com/vezer/)
   - [TouchOSC](https://hexler.net/touchosc)
+  - Chataigne
+  - Millumin
+  - QLab
   - ...
 
 For *Max for Live* developers:
