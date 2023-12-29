@@ -24,6 +24,7 @@ It enables you to simply control your showlasers via any OSC-compatible software
   - Chataigne (free)
   - OSSIA score (free)
   - TWO (free)
+  - OSC See
   - Millumin
   - QLab
   - ...
