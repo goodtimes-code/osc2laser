@@ -23,6 +23,7 @@ It enables you to simply control your showlasers via any OSC-compatible software
   - [TouchOSC](https://hexler.net/touchosc)
   - Chataigne (free)
   - OSSIA score (free)
+  - TWO (free)
   - Millumin
   - QLab
   - ...
