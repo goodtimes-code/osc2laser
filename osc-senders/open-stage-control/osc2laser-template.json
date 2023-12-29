@@ -75,7 +75,8 @@
           "2: Red vertical line": 2,
           "3: Blue static wave": 3,
           "4: Blue animated wave": 4,
-          "5: Green static circle": 5
+          "5: Green static circle": 5,
+          "6: Green Static Point": 6
         },
         "value": "",
         "default": 0,

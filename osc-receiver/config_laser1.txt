@@ -14,6 +14,7 @@ osc_server_effect_handling = no
 # Pixel dimensions
 width = 4095
 height = 4095
+driver_name = HeliosLaserDAC-x64.dll
 
 # How many points per second to display
 # max: see laser device specification
