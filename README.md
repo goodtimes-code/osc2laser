@@ -24,6 +24,7 @@ It enables you to simply control your showlasers via any OSC-compatible software
   - Chataigne (free)
   - OSSIA score (free)
   - TWO (free)
+  - OSC See
   - Millumin
   - QLab
   - ...
@@ -84,7 +85,7 @@ See *config_laser1.txt* for more optional settings.
   - 6 - green static point
 
 ## Effects
-- /effect/x_pos and /effect/x_pos
+- /effect/x_pos and /effect/y_pos
   - -4095 to 4095: move X or Y position of laserobject
 - /effect/xy_pos
   - (-4095 to 4095, -4095 to 4095): move X and Y position of laserobject at once
