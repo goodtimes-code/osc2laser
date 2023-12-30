@@ -10,7 +10,7 @@ It enables you to simply control your showlasers via any OSC-compatible software
 # Features
 - Easy laser output preview (2D)
 - Multiple static and animated [laser objects](#laser-objects)
-- [Effects](#effects)
+- Many [effects](#effects) available
 
 # System requirements
 - Python 3 runtime
