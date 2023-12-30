@@ -96,7 +96,7 @@ See *config_laser1.txt* for more optional settings.
 - /effect/rotation_degrees
   - 0 to 360: degrees of static rotation (0 = no static rotation)
 - /effect/rotation_speed
-  - 0 to 999: degrees of continuous rotation (0 = no continuous rotation)
+  - 0 to 1024: speed of continuous rotation (0 = no continuous rotation)
 - /effect/color_change/[r, g, b]
   - 0 to 255: color intensity of red, green and blue
 
