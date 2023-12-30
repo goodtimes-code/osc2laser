@@ -9,7 +9,7 @@ import math
 
 def apply_effects_to_laser_points(visible_laser_object):
     optimized_points = []
-    rgb_intensity, x_shift, y_shift, scale_factor, rotation_degrees,color_r,color_g,color_b = 255, 0, 0, 1, 0, None, None, None
+    rgb_intensity, x_shift, y_shift, scale_factor, rotation_degrees,color_r,color_g,color_b,dotted = 255, 0, 0, 1, 0, None, None, None, None
 
     # Extracting effect levels from the visible laser object
     for effect in visible_laser_object.effects:
@@ -29,6 +29,8 @@ def apply_effects_to_laser_points(visible_laser_object):
             color_g = effect.level
         elif effect.name == 'COLOR_CHANGE_B':
             color_b = effect.level
+        elif effect.name == 'DOTTED_POINTS':
+            dotted = effect.level
 
     # Apply X_POS and Y_POS effects and calculate the new geometric center
     shifted_points = []
@@ -38,12 +40,34 @@ def apply_effects_to_laser_points(visible_laser_object):
         shifted_point.y += y_shift
         shifted_points.append(shifted_point)
 
+        # remember the color
+        current_color_r = shifted_point.r
+        current_color_g = shifted_point.g
+        current_color_b = shifted_point.b
+
+
         if color_r:
             shifted_point.r = color_r
         if color_b: 
             shifted_point.b = color_b
         if color_g:
             shifted_point.g = color_g
+        if dotted:
+            print("Muss ich was tun")
+            print(shifted_point.x % dotted)
+            if shifted_point.x % dotted:
+                shifted_point.r = current_color_r
+                shifted_point.g = current_color_g
+                shifted_point.b = current_color_b
+                print("Farbe bleibt")
+            else:
+                # Set Color to black
+                shifted_point.r = 0
+                shifted_point.g = 0
+                shifted_point.b = 0
+                print("Farbe schwarz")
+                
+
 
     total_x, total_y = sum(p.x for p in shifted_points), sum(p.y for p in shifted_points)
     center_x, center_y = total_x / len(shifted_points), total_y / len(shifted_points)
