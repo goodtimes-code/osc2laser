@@ -98,35 +98,6 @@ See *config_laser1.txt* for more optional settings.
 - /effect/color_change/[r, g, b]
   - 0 to 255: color intensity of red, green and blue
 
-# Roadmap
-This is what needs to be worked on. 
-As a developer, feel free to commit your changes via pull request. 
-
-## OSC receiver
-- More binary releases
-  - Windows
-  - Linux
-- More laser objects
-  - ILDA file
-  - SVG file
-  - ...
-- More laser effects
-  - Dots
-  - Scan rate
-  - ...
-- More laser DACs
-  - EtherDream
-  - ShowNet
-  - Pangolin FB3/FB4
-  - Moncha
-  - LaserCube
-  - ...
-- More OSC sender examples
-  - TouchOSC
-  - Python script
-- Clean code
-  - Add tests
-
 ## Example OSC senders
 ### Max for Live device
 - UI input fields for network parameters (IP and port)
