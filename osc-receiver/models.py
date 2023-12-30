@@ -1,6 +1,7 @@
 import global_data
 import math
 import random
+from utils import calculate_geometric_center
 
 
 class Effect():
@@ -45,8 +46,19 @@ class LaserObject():
             if effect.name == effect_name:
                 return True
             
+    def apply_rotation(self, rotation_speed):
+        center_x, center_y = calculate_geometric_center(self.point_list)
+        rotation_radians = math.radians(rotation_speed)
+
+        for point in self.point_list:
+            dx, dy = point.x - center_x, point.y - center_y
+            point.x = center_x + dx * math.cos(rotation_radians) - dy * math.sin(rotation_radians)
+            point.y = center_y + dx * math.sin(rotation_radians) + dy * math.cos(rotation_radians)
+            
     def update(self):
-        pass
+        for effect in self.effects:
+            if effect.name == 'ROTATION_SPEED':
+                self.apply_rotation(effect.level/255)
     
     def __str__(self):
         return('LaserObject, type: ' + str(type(self)) + ', group:' + str(self.group) + ', effects:' + str(self.effects))
@@ -142,7 +154,6 @@ class AnimatedWave(StaticWave):
 
     def update(self):
         self.animation_progress += self.animation_speed
-
         self.point_list = []
 
         for x in range(0, self.wave_length, 50):
@@ -167,6 +178,8 @@ class AnimatedWave(StaticWave):
             laser_point = LaserPoint(int(x), int(y))
             laser_point.set_color(0, 0, 100)
             self.point_list.append(laser_point)
+            
+        super().update()
 
 
 

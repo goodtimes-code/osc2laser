@@ -44,6 +44,7 @@ def handle_osc_message(address, *args):
                 "/effect/rgb_intensity": "RGB_INTENSITY",
                 "/effect/scale_factor": "SCALE_FACTOR",
                 "/effect/rotation_degrees": "ROTATION_DEGREES",
+                "/effect/rotation_speed": "ROTATION_SPEED",
                 "/effect/color_change/r": "COLOR_CHANGE_R",
                 "/effect/color_change/g": "COLOR_CHANGE_G",
                 "/effect/color_change/b": "COLOR_CHANGE_B"
@@ -76,6 +77,7 @@ def process_osc_input():
     disp.map("/effect/rgb_intensity", handle_osc_message)
     disp.map("/effect/scale_factor", handle_osc_message)
     disp.map("/effect/rotation_degrees", handle_osc_message)
+    disp.map("/effect/rotation_speed", handle_osc_message)
     disp.map("/effect/color_change/r", handle_osc_message)
     disp.map("/effect/color_change/g", handle_osc_message)
     disp.map("/effect/color_change/b", handle_osc_message)
