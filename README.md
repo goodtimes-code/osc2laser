@@ -94,7 +94,9 @@ See *config_laser1.txt* for more optional settings.
 - /effect/scale_factor
   - -10 to 10: scaling factor of shape (1 = no scale)
 - /effect/rotation_degrees
-  - 0 to 360: degrees of static rotation (0 = no rotation)
+  - 0 to 360: degrees of static rotation (0 = no static rotation)
+- /effect/rotation_speed
+  - 0 to 999: degrees of continuous rotation (0 = no continuous rotation)
 - /effect/color_change/[r, g, b]
   - 0 to 255: color intensity of red, green and blue
 
