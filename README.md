@@ -74,6 +74,10 @@ See *config_laser1.txt* for more optional settings.
 6. Add key frames to the automation lanes and watch the output in the laser preview window.
 
 # OSC messages
+## Globals
+- /globals/scan_rate
+  - 100 to 40000: scan rate (points per second)
+
 ## Laser objects
 - /laserobject
   - 0 = blank
