@@ -51,8 +51,7 @@ def handle_osc_message(address, *args):
                 "/effect/rotation_speed": "ROTATION_SPEED",
                 "/effect/color_change/r": "COLOR_CHANGE_R",
                 "/effect/color_change/g": "COLOR_CHANGE_G",
-                "/effect/color_change/b": "COLOR_CHANGE_B",
-                "/globals/scan_rate": "SCAN_RATE"
+                "/effect/color_change/b": "COLOR_CHANGE_B"
             }
             effect_name = effect_names.get(address, "UNKNOWN_EFFECT")
             handle_effect(effect_name, pos)
@@ -75,6 +74,7 @@ def handle_effect(effect_name, pos):
 def process_osc_input():    
     disp = dispatcher.Dispatcher()
     disp.map("*", print_osc_message)
+    disp.map("/globals/scan_rate", handle_osc_message)
     disp.map("/laserobject", handle_osc_message)
     disp.map("/effect/x_pos", handle_osc_message)
     disp.map("/effect/y_pos", handle_osc_message)
