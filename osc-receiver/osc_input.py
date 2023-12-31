@@ -32,7 +32,7 @@ def handle_osc_message(address, *args):
                 logging.info(f'[OSC] Added new laser object: {laser_object}')
         except Exception as e:
             logging.error(f'[OSC] Error while adding new laser object: {e}')
-    # /effect is related to LaserObject
+    # /effect is related to any LaserObject
     elif address.startswith("/effect/"):
         if address == "/effect/xy_pos":
             # Handle the combined XY position message
@@ -55,6 +55,12 @@ def handle_osc_message(address, *args):
             }
             effect_name = effect_names.get(address, "UNKNOWN_EFFECT")
             handle_effect(effect_name, pos)
+    elif address.startswith("/parameters/"):
+        parameter_name = address.split('/')[2]
+        parameter_value = int(args[0])
+        if global_data.config['logging']['osc_server_parameter_handling'] == 'yes':
+            logging.info(f"[OSC] Handling parameter {parameter_name}: {parameter_value}")
+        global_data.parameters[parameter_name] = parameter_value
 
 def handle_effect(effect_name, pos):
     if global_data.config['logging']['osc_server_effect_handling'] == 'yes':
@@ -86,6 +92,7 @@ def process_osc_input():
     disp.map("/effect/color_change/r", handle_osc_message)
     disp.map("/effect/color_change/g", handle_osc_message)
     disp.map("/effect/color_change/b", handle_osc_message)
+    disp.map("/parameters/*", handle_osc_message)
 
     server = osc_server.ThreadingOSCUDPServer(
         (global_data.config['osc_server']['ip'], int(global_data.config['osc_server']['port'])), disp)

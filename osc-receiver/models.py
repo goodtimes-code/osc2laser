@@ -128,15 +128,25 @@ class StaticWave(LaserObject):
         
         # Set up wave properties
         self.wave_length = int(global_data.config['laser_output']['width'])
-        self.amplitude = 500
+        self.amplitude = 500        
         self.frequency = 3
         self.vertical_shift = int(global_data.config['laser_output']['height']) / 2
+        
+        self.draw_wave()
 
+    def draw_wave(self):
+        self.point_list = []
         for x in range(0, int(global_data.config['laser_output']['width']), 50):
             y = math.sin((2 * math.pi * self.frequency * x) / self.wave_length) * self.amplitude + self.vertical_shift
             laser_point = LaserPoint(int(x), int(y))
             laser_point.set_color(0, 0, 255)
             self.point_list.append(laser_point)
+            
+    def update(self):
+        super().update()
+        if 'wave_amplitude' in global_data.parameters and self.amplitude != global_data.parameters['wave_amplitude']:
+            self.amplitude = global_data.parameters['wave_amplitude']
+            self.draw_wave()
 
 
 class AnimatedWave(StaticWave):
