@@ -5,7 +5,6 @@ import global_data
 
 
 def process_laser_output():
-    SCAN_RATE = int(global_data.config['laser_output']['scan_rate'])
     INTENSITY_FACTOR = float(global_data.config['laser_output']['intensity_factor']) # 0.0 - 1.0
 
     logging.info('[LaserOut] Initializing laser output thread...')
@@ -35,7 +34,7 @@ def process_laser_output():
         point_type = HeliosPoint * 1
         helios_points = point_type()
         helios_points[0] = HeliosPoint(0, 0, 0, 0, 0, 0)
-        HeliosLib.WriteFrame(0, SCAN_RATE, 0, ctypes.pointer(helios_points), 1)
+        HeliosLib.WriteFrame(0, global_data.scan_rate, 0, ctypes.pointer(helios_points), 1)
 
     initialize()
     
@@ -61,7 +60,7 @@ def process_laser_output():
             wait_until_ready()
 
             # really draw points via Helios Laser DAC
-            HeliosLib.WriteFrame(0, SCAN_RATE, 0, ctypes.pointer(helios_points), count_points)
+            HeliosLib.WriteFrame(0, global_data.scan_rate, 0, ctypes.pointer(helios_points), count_points)
         else:
             wait_until_ready()
             blackout()

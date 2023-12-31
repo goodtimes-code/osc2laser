@@ -27,10 +27,10 @@ def main():
     from laser_output import process_laser_output
     from laser_preview import LaserPreview
 
-    global main_running
-
     print(art.text2art("osc2laser"))
     logging.info('[Main] Starting up...')
+    
+    global_data.scan_rate = global_data.config['laser_output']['scan_rate']
 
     laser_output_thread = threading.Thread(target=process_laser_output)
     laser_output_thread.start()

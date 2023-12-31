@@ -16,7 +16,11 @@ def print_osc_message(address, *args):
     
 
 def handle_osc_message(address, *args):
-    if address == "/laserobject":
+    if address == "/globals/scan_rate":
+        global_data.scan_rate = int(args[0])
+        if global_data.config['logging']['osc_server_received_message'] == 'yes':
+            logging.info(f"[OSC] Handling global scan_rate: {global_data.scan_rate}")
+    elif address == "/laserobject":
         laserobject_id = int(args[0])
         if global_data.config['logging']['osc_server_received_message'] == 'yes':
             logging.info(f"[OSC] Handling laserobject ID: {laserobject_id}")
@@ -28,7 +32,7 @@ def handle_osc_message(address, *args):
                 logging.info(f'[OSC] Added new laser object: {laser_object}')
         except Exception as e:
             logging.error(f'[OSC] Error while adding new laser object: {e}')
-            
+    # /effect is related to LaserObject
     elif address.startswith("/effect/"):
         if address == "/effect/xy_pos":
             # Handle the combined XY position message
@@ -47,7 +51,8 @@ def handle_osc_message(address, *args):
                 "/effect/rotation_speed": "ROTATION_SPEED",
                 "/effect/color_change/r": "COLOR_CHANGE_R",
                 "/effect/color_change/g": "COLOR_CHANGE_G",
-                "/effect/color_change/b": "COLOR_CHANGE_B"
+                "/effect/color_change/b": "COLOR_CHANGE_B",
+                "/globals/scan_rate": "SCAN_RATE"
             }
             effect_name = effect_names.get(address, "UNKNOWN_EFFECT")
             handle_effect(effect_name, pos)
@@ -81,6 +86,7 @@ def process_osc_input():
     disp.map("/effect/color_change/r", handle_osc_message)
     disp.map("/effect/color_change/g", handle_osc_message)
     disp.map("/effect/color_change/b", handle_osc_message)
+    disp.map("/effect/scan_rate", handle_osc_message)
 
     server = osc_server.ThreadingOSCUDPServer(
         (global_data.config['osc_server']['ip'], int(global_data.config['osc_server']['port'])), disp)
