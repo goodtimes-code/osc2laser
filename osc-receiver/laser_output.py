@@ -13,9 +13,9 @@ def process_laser_output():
     class HeliosPoint(ctypes.Structure):
         _fields_ = [('x', ctypes.c_uint16),
                     ('y', ctypes.c_uint16),
-                    ('r', ctypes.c_uint8),
-                    ('g', ctypes.c_uint8),
-                    ('b', ctypes.c_uint8),
+                    ('r', ctypes.c_uint8), # 8 bit = 0-255
+                    ('g', ctypes.c_uint8), # 8 bit = 0-255
+                    ('b', ctypes.c_uint8), # 8 bit = 0-255
                     ('i', ctypes.c_uint8)] # useless
 
     def initialize():
@@ -53,6 +53,7 @@ def process_laser_output():
             i = 0
             for laser_point in optimized_point_list:
                 helios_points[i] = HeliosPoint(int(laser_point.x), int(laser_point.y), int(laser_point.r * INTENSITY_FACTOR), int(laser_point.g * INTENSITY_FACTOR), int(laser_point.b * INTENSITY_FACTOR), 0)
+                # print(laser_point.b)
                 if global_data.config['logging']['laser_point'] == 'yes':
                     logging.debug('[LaserOutput] LaserPoint: ' + str(laser_point))
                 i += 1
