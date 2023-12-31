@@ -10,7 +10,8 @@ It enables you to simply control your showlasers via any OSC-compatible software
 # Features
 - Easy laser output preview (2D)
 - Multiple static and animated [laser objects](#laser-objects)
-- Many [effects](#effects) available
+- Change [parameters](#parameters) of laser objects 
+- Many [effects](#effects) for laser objects available
 
 # System requirements
 - Python 3 runtime
@@ -87,6 +88,10 @@ See *config_laser1.txt* for more optional settings.
   - 4 - blue animated wave
   - 5 - green static circle
   - 6 - green static point
+
+## Parameters
+- /parameters/wave_amplitude
+  - 0-5000: Wave amplitude (used in StaticWave laser object)
 
 ## Effects
 - /effect/x_pos and /effect/y_pos
