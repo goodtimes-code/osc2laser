@@ -57,7 +57,7 @@ def handle_osc_message(address, *args):
             handle_effect(effect_name, pos)
     elif address.startswith("/parameters/"):
         parameter_name = address.split('/')[2]
-        parameter_value = int(args[0])
+        parameter_value = float(args[0])
         if global_data.config['logging']['osc_server_parameter_handling'] == 'yes':
             logging.info(f"[OSC] Handling parameter {parameter_name}: {parameter_value}")
         global_data.parameters[parameter_name] = parameter_value

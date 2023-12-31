@@ -147,6 +147,16 @@ class StaticWave(LaserObject):
         if 'wave_amplitude' in global_data.parameters and self.amplitude != global_data.parameters['wave_amplitude']:
             self.amplitude = global_data.parameters['wave_amplitude']
             self.draw_wave()
+            
+        if 'wave_length' in global_data.parameters and self.wave_length != global_data.parameters['wave_length']:
+            self.wave_length = global_data.parameters['wave_length']
+            self.draw_wave()
+        
+        """    
+        if 'wave_frequency' in global_data.parameters and self.frequency != global_data.parameters['wave_frequency']:
+            self.frequency = global_data.parameters['wave_frequency']
+            self.draw_wave()
+        """
 
 
 class AnimatedWave(StaticWave):
@@ -165,8 +175,11 @@ class AnimatedWave(StaticWave):
     def update(self):
         self.animation_progress += self.animation_speed
         self.point_list = []
+        
+        if 'wave_speed' in global_data.parameters and self.animation_speed != global_data.parameters['wave_speed']:
+            self.animation_speed = global_data.parameters['wave_speed']
 
-        for x in range(0, self.wave_length, 50):
+        for x in range(0, int(self.wave_length), 50):
             # Varying amplitude and frequency with new parameters
             varied_amplitude = self.amplitude + math.sin(x / 100.0) * self.amplitude_mod
             varied_frequency = self.frequency + math.sin(x / 200.0) * self.frequency_mod

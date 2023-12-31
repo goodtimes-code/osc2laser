@@ -91,7 +91,11 @@ See *config_laser1.txt* for more optional settings.
 
 ## Parameters
 - /parameters/wave_amplitude
-  - 0-5000: Wave amplitude (used in StaticWave laser object)
+  - 0-5000: Wave amplitude
+- /parameters/wave_length
+  - 5000-15000: Wave length
+- /parameters/wave_speed
+  - 0-75: Wave speed
 
 ## Effects
 - /effect/x_pos and /effect/y_pos
