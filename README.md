@@ -85,9 +85,10 @@ See *config_laser1.txt* for more optional settings.
   - 1 = green horizontal line
   - 2 = red vertical line
   - 3 = blue static wave
-  - 4 - blue animated wave
-  - 5 - green static circle
-  - 6 - green static point
+  - 4 = blue animated wave
+  - 5 = green static circle
+  - 6 = green static point
+  - 7 = white static stars
 
 ## Parameters
 - /parameters/wave_amplitude
