@@ -203,6 +203,38 @@ class AnimatedWave(StaticWave):
             self.point_list.append(laser_point)
             
         super().update()
+        
+
+class StaticStars(LaserObject):
+    def __init__(self, group=0):
+        super().__init__()
+        self.group = group
+        self.star_count = global_data.parameters.get('stars_amount', 50)  # Default to 50 stars if not specified
+        self.generate_stars()
+
+    def generate_stars(self):
+        self.point_list = []
+        for _ in range(self.star_count):
+            # Add the actual star point
+            x = random.randint(0, int(global_data.config['laser_output']['width']))
+            y = random.randint(0, int(global_data.config['laser_output']['height']))
+            star_point = LaserPoint(x, y)
+            star_point.set_color(255, 255, 255)  # White color for stars
+            self.point_list.append(star_point)
+
+            # Add a blank point after each star to ensure the laser is off when moving to the next point
+            blank_point = LaserPoint(x, y)
+            blank_point.set_color(0, 0, 0)
+            self.point_list.append(blank_point)
+
+    def update(self):
+        if 'stars_amount' in global_data.parameters and self.star_count != global_data.parameters['stars_amount']:
+            self.star_count = global_data.parameters['stars_amount']
+            self.generate_stars()
+        super().update()
+
+
+
 
 
 
