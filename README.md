@@ -114,10 +114,6 @@ See *config_laser1.txt* for more optional settings.
 - /effect/color_change/[r, g, b]
   - 0 to 255: color intensity of red, green and blue
 
-## Example OSC senders
-### Max for Live device
-- UI input fields for network parameters (IP and port)
-
 # Run installer (create binary)
 ## For Mac & Linux
 - `cd osc-receiver`
