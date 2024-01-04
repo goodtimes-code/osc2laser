@@ -34,8 +34,9 @@ For *Max for Live* developers:
 - [Max for Live](https://www.ableton.com/de/live/max-for-live/)
 
 # Components
-- *osc-senders/max-for-live-device/osc2laser.amxd*: Max for Live instrument 
 - *osc-receiver*: The server component which receives OSC commands and translates them to a laser DAC.
+- *osc-senders/open-stagecontrol*: Template for open-stage-control GUI (OSC client with desktop and web UI) 
+- *osc-senders/max-for-live-device/osc2laser.amxd*: Max for Live instrument 
 
 # Quick Start
 ## OSC receiver
