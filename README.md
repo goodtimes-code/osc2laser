@@ -122,7 +122,7 @@ See *config_laser1.txt* for more optional settings.
 - Run binary: `/dist/main`
 
 # Support & Community
-Join our [Discord](https://discord.gg/3JKDDWr9w6) server to discuss your ideas and issues with the community.
+Join our [Community](https://community.goodtimes.technology/c/osc2laser/5) to discuss your ideas and issues.
 
 # Sponsors
 - [goodtimes](https://www.goodtimes.technology) | Interactive showlaser technology: lasershows, laser art, laser games, laser control software
