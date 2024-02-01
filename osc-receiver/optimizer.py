@@ -40,9 +40,10 @@ def apply_effects_to_laser_points(visible_laser_object):
         shifted_points.append(shifted_point)
 
         # Apply color change if necessary
-        if color_r: shifted_point.r = color_r
-        if color_g: shifted_point.g = color_g
-        if color_b: shifted_point.b = color_b
+        if not laser_point.is_blank():
+            if color_r: shifted_point.r = color_r
+            if color_g: shifted_point.g = color_g
+            if color_b: shifted_point.b = color_b
 
     total_x, total_y = sum(p.x for p in shifted_points), sum(p.y for p in shifted_points)
     center_x, center_y = calculate_geometric_center(shifted_points)

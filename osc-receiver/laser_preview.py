@@ -30,7 +30,9 @@ class LaserPreview():
             laser_point_output.x =laser_point_output.x * float(global_data.config['laser_preview']['screen_scale_factor'])
             laser_point_output.y =laser_point_output.y * float(global_data.config['laser_preview']['screen_scale_factor'])  
 
-            pg.draw.circle(self.screen, (laser_point_output.r, laser_point_output.g, laser_point_output.b) , (laser_point_output.x, laser_point_output.y), self.LASER_POINT_SIZE)
+            if not laser_point.is_blank():
+                pg.draw.circle(self.screen, (laser_point_output.r, laser_point_output.g, laser_point_output.b) , (laser_point_output.x, laser_point_output.y), self.LASER_POINT_SIZE)
+            
             if previous_laser_point_output and not laser_point.is_blank():
                 pg.draw.line(self.screen, (laser_point_output.r, laser_point_output.g, laser_point_output.b), (previous_laser_point_output.x, previous_laser_point_output.y), (laser_point_output.x, laser_point_output.y), self.LASER_POINT_SIZE)
             previous_laser_point_output = laser_point_output
