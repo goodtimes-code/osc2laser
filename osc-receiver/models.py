@@ -209,7 +209,7 @@ class StaticStars(LaserObject):
     def __init__(self, group=0):
         super().__init__()
         self.group = group
-        self.star_count = global_data.parameters.get('stars_amount', 8)  # Default to 50 stars if not specified
+        self.star_count = int(global_data.parameters.get('stars_amount', 8))  # Default to 50 stars if not specified
         self.generate_stars()
 
     def generate_stars(self):
@@ -235,7 +235,7 @@ class StaticStars(LaserObject):
 
     def update(self):
         if 'stars_amount' in global_data.parameters and self.star_count != global_data.parameters['stars_amount']:
-            self.star_count = global_data.parameters['stars_amount']
+            self.star_count = int(global_data.parameters['stars_amount'])
             self.generate_stars()
         super().update()
 
