@@ -991,8 +991,8 @@
         "align": "center"
       },
       {
-        "type": "input",
-        "top": 460,
+        "type": "knob",
+        "top": 450,
         "left": 300,
         "lock": false,
         "id": "parameter_stars_amount",
@@ -1000,7 +1000,7 @@
         "interaction": true,
         "comments": "",
         "width": 100,
-        "height": 60,
+        "height": 70,
         "expand": "false",
         "colorText": "auto",
         "colorWidget": "auto",
@@ -1012,16 +1012,10 @@
         "lineWidth": "auto",
         "borderRadius": "auto",
         "padding": "auto",
-        "html": "No. of Stars",
+        "html": "Amount",
         "css": "",
-        "align": "center",
-        "unit": "",
-        "asYouType": false,
-        "numeric": true,
-        "validation": "",
-        "maxLength": "",
         "value": 5,
-        "default": "",
+        "default": 5,
         "linkId": "",
         "address": "/parameters/stars_amount",
         "preArgs": "",
@@ -1031,7 +1025,23 @@
         "ignoreDefaults": false,
         "bypass": false,
         "onCreate": "",
-        "onValue": ""
+        "onValue": "",
+        "design": "default",
+        "pips": false,
+        "dashed": false,
+        "angle": 270,
+        "mode": "vertical",
+        "spring": false,
+        "doubleTap": false,
+        "range": {
+          "min": 3,
+          "max": 1000
+        },
+        "logScale": false,
+        "sensitivity": 0.05,
+        "steps": "",
+        "origin": "auto",
+        "onTouch": ""
       }
     ],
     "tabs": []
