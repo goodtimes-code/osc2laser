@@ -5,6 +5,7 @@ import time
 import global_data
 import argparse
 import threading
+import copy
 import pythonosc.udp_client
 from pythonosc import dispatcher
 from pythonosc import osc_server
@@ -13,7 +14,6 @@ from pythonosc import osc_server
 def print_osc_message(address, *args):
     if global_data.config['logging']['osc_server_received_message'] == 'yes':
         print(f"[OSC] Received OSC message at {address}: {args}")
-    
 
 def handle_osc_message(address, *args):
     if address == "/globals/scan_rate":
@@ -25,7 +25,7 @@ def handle_osc_message(address, *args):
         if global_data.config['logging']['osc_server_received_message'] == 'yes':
             logging.info(f"[OSC] Handling laserobject ID: {laserobject_id}")
         try:
-            laser_object = global_data.NOTE_LASEROBJECT_MAPPING[laserobject_id]
+            laser_object = copy.deepcopy(global_data.NOTE_LASEROBJECT_MAPPING[laserobject_id])
             laser_object.group = 0
             global_data.visible_laser_objects = [laser_object]
             if global_data.config['logging']['osc_server_add_or_remove_laser_object'] == 'yes':

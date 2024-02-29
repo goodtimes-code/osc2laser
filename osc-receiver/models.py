@@ -80,9 +80,9 @@ class StaticLine(LaserObject):
     def __init__(self, from_point, to_point, group = 0):
         self.point_list = []
         self.group = group
-
+        
         self.point_list.append(from_point)
-        self.point_list.append(to_point)
+        self.point_list.append(to_point)     
 
 
 class StaticPoint(LaserObject):
