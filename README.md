@@ -132,7 +132,10 @@ See *config_laser1.txt* for more optional settings.
 - Find Mac package in `dist/osc2laser.pkg`
 
 # Support & Community
-Join our [Community](https://community.goodtimes.technology/c/osc2laser/5) to discuss your ideas and issues.
+[Here](https://github.com/goodtimes-code/osc2laser/discussions) you can discuss your ideas and issues.
+
+# Contribute as a developer
+Feel free to work on any [issue](https://github.com/goodtimes-code/osc2laser/issues) by forking and creating a pull request.
 
 # Sponsors
 - [goodtimes](https://www.goodtimes.technology) | Interactive showlaser technology: lasershows, laser art, laser games, laser control software
