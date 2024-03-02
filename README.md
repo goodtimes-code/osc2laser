@@ -34,12 +34,22 @@ For *Max for Live* developers:
 - [Max for Live](https://www.ableton.com/de/live/max-for-live/)
 
 # Components
-- *osc-receiver*: The server component which receives OSC commands and translates them to a laser DAC.
+- *osc-receiver*: The server component which receives OSC commands and translates them to a laser DAC. Also provides 2D preview window.
 - *osc-senders/open-stagecontrol*: Template for open-stage-control GUI (OSC client with desktop and web UI) 
 - *osc-senders/max-for-live-device/osc2laser.amxd*: Max for Live instrument 
 
 # Quick Start
 ## OSC receiver
+### macOS
+ - Install ***.pkg*** file
+ - Review config
+   - Browse to ***/Applications***
+   - Right click -> Show package content
+   - Browse to ***Contents*** -> ***MacOS***
+   - Edit and save ***config_laser1.txt***
+ - Launch application (via ***/Applications*** -> right click on ***osc2laser*** -> ***Open***)
+
+### Any OS (run Python code manually)
 - Python 3:
   1. Install the Python 3 runtime which matches your operating system (Windows, Mac, Linux,...).
   2. Install virtual environment: `python -m venv venv`

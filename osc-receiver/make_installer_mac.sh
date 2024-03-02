@@ -23,7 +23,7 @@ cat > dist/osc2laser.app/Contents/Info.plist <<EOF
     <key>CFBundleName</key>
     <string>osc2laser</string>
     <key>CFBundleVersion</key>
-    <string>1.0.0</string>
+    <string>1.1.0</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
 </dict>
