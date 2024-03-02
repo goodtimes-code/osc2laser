@@ -9,6 +9,16 @@ import logging
 import configparser
 import global_data
 
+# Set the working directory to the directory of the executable
+if getattr(sys, 'frozen', False):
+    # If the application is frozen (packaged by PyInstaller), set the working directory to the executable's directory
+    application_path = os.path.dirname(sys.executable)
+else:
+    # If the application is not frozen, assume it's running from the source code directory
+    application_path = os.path.dirname(os.path.abspath(__file__))
+
+os.chdir(application_path)
+
 # Initialization
 logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
 

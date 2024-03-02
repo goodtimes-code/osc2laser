@@ -115,11 +115,11 @@ See *config_laser1.txt* for more optional settings.
 - /effect/color_change/[r, g, b]
   - 0 to 255: color intensity of red, green and blue
 
-# Run installer (create binary)
-## For Mac & Linux
-- `cd osc-receiver`
-- `venv/bin/pyinstaller --onefile --paths=venv/lib/python3.12/site-packages main.py`
-- Run binary: `/dist/main`
+# Create installer
+## For Mac
+- Increase version number in  `make_installer_mac.sh`
+- Run: `make_installer_mac.sh`
+- Find Mac package in `dist/osc2laser.pkg`
 
 # Support & Community
 Join our [Community](https://community.goodtimes.technology/c/osc2laser/5) to discuss your ideas and issues.
