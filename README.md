@@ -58,6 +58,8 @@ For *Max for Live* developers:
   5. Install requirements: `python -m pip install -r requirements.txt`
 - Laser DAC driver:
   1. Get the right `osc-receiver/libHeliosDacAPI.so` from [here](https://github.com/Grix/helios_dac) to match your OS (driver for x86_64 macOS already included) 
+- Configuration:
+  1. Edit and save ***config_laser1.txt***
 - Run:
   1. Start OSC receiver: `python main.py`
 
