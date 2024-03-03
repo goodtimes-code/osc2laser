@@ -2,6 +2,7 @@ import os
 import art
 import time
 import argparse
+import sys
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame as pg
 import threading
